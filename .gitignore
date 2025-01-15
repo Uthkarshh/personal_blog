@@ -1,0 +1,6 @@
+# Exclude a folder and its contents
+.personal_blog/
+__pycache__/
+
+# Exclude a file
+testing.ipynb
