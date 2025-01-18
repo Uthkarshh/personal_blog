@@ -5,6 +5,7 @@ from flaskblog.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets
 import os
+from PIL import Image
 
 posts = [
     {
@@ -70,7 +71,10 @@ def save_picture(form_picutre):
     _, f_ext = os.path.splitext(form_picutre.filename)
     picture_fn = random_hex + f_ext
     picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
-    form_picutre.save(picture_path)
+    output_size = (125,125)
+    i = Image.open(form_picutre)
+    i.thumbnail(output_size)
+    i.save(picture_path)
     return picture_fn
 
 @app.route("/account", methods = ["GET", "POST"])
